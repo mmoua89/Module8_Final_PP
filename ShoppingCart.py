@@ -3,7 +3,7 @@ A Shopping Cart class that represent a customer name,
 date and the added items with their prices and the total cost.
 """
 from datetime import datetime
-from Item import Item
+
 class ShoppingCart:
     def __init__(self, customerName="none", currentDate=datetime(2020, 1, 1)):
         """
@@ -93,5 +93,9 @@ class ShoppingCart:
         Print each item and their description
         :return: none
         """
+        if len(self.cartItems) == 0:
+            print('SHOPPING CART IS EMPTY.')
+            return
+
         for item in self.cartItems:
             print('{}: {}'.format(item.itemName, item.itemDescription))

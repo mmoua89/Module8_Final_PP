@@ -1,13 +1,25 @@
 """
 Author: Meng Moua
 Course: CSC500
-Assignment: Module 6, Portfolio Milestone 2
+Assignment: Module 8, Final Portfolio Project
 """
 from ShoppingCart import ShoppingCart
 from Item import Item
+from datetime import datetime
 
 def main():
-    shoppingCart = ShoppingCart("Meng")
+    customerName = input("Enter customer's name:\n")
+    todayDate = input("Enter today's date in the format of [January 31, 9999]:\n")
+
+    while(not isValidDate(todayDate)):
+        print('Entered date is not a valid date. Please try again:')
+        todayDate = input()
+
+    print('Customer name:', customerName.title())
+    print("Today's date:", todayDate.capitalize())
+
+    dateObject = datetime.strptime(todayDate, "%B %d, %Y").date()
+    shoppingCart = ShoppingCart(customerName.title(), dateObject)
 
     while True:
         printMenu()
@@ -61,6 +73,18 @@ def main():
             print('Invalid choice, please try again')
 
         print()
+
+def isValidDate(dateString):
+    """
+    Validate the date string
+    :param dateString: date string in the format [January 31, 9999]
+    :return: true or false
+    """
+    try:
+        datetime.strptime(dateString, "%B %d, %Y")
+        return True
+    except ValueError:
+        return False
 
 def printMenu():
     """
